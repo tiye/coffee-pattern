@@ -1,0 +1,22 @@
+{
+  "name": "coffee-pattern",
+  "version": "0.0.1",
+  "description": "dead simple patter matching in CoffeeScript",
+  "main": "pattern.js",
+  "scripts": {
+    "test": "jasmine-node --autotest --watch pattern.coffee --coffee test.Spec.coffee --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jiyinyiyong/coffee-pattern.git"
+  },
+  "keywords": [
+    "pattern",
+    "matching"
+  ],
+  "author": "jiyinyiyong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiyinyiyong/coffee-pattern/issues"
+  }
+}
