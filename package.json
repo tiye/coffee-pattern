@@ -1,7 +1,7 @@
 {
   "name": "coffee-pattern",
-  "version": "0.0.1",
-  "description": "dead simple patter matching in CoffeeScript",
+  "version": "0.0.2",
+  "description": "coffee-pattern: write pattern matching in CoffeeScript syntax",
   "main": "pattern.js",
   "scripts": {
     "test": "jasmine-node --autotest --watch pattern.coffee --coffee test.Spec.coffee --verbose"
