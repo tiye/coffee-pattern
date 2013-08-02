@@ -12,7 +12,7 @@ divide_list = function(stack, long_list) {
   var solution;
   if (long_list.length > 0) {
     solution = {
-      tag: long_list[0],
+      pattern: long_list[0],
       result: long_list[1]
     };
     stack.push(solution);
@@ -26,20 +26,24 @@ exports.match = function() {
   var choices, chosen, data, possible, sure;
   data = arguments[0], choices = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
   possible = (divide_list([], choices)).filter(function(solution) {
-    if (solution.tag == null) {
+    var the_type;
+    the_type = get_type(solution.pattern);
+    if (solution.pattern == null) {
       return true;
-    } else if ((get_type(solution.tag)) === 'regexp') {
+    } else if (the_type === 'regexp') {
       if ((get_type(data)) === 'string') {
-        return data.match(solution.tag);
+        return data.match(solution.pattern);
       } else {
         return false;
       }
+    } else if (the_type === 'function') {
+      return solution.pattern(data);
     } else {
-      return data === solution.tag;
+      return data === solution.pattern;
     }
   });
   sure = possible.filter(function(solution) {
-    return solution.tag != null;
+    return solution.pattern != null;
   });
   chosen = sure.length > 0 ? sure[0] : possible[0];
   if (chosen != null) {

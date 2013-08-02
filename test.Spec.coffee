@@ -47,3 +47,9 @@ describe 'test patterns', ->
   it 'returns undefined when really no match', ->
     ret = match 'something'
     expect(ret).toBe(undefined)
+
+  it 'also accepts function as pattern', ->
+    isString = (x) -> (typeof x) is 'string'
+    ret = match 'string',
+      isString, 1
+    expect(ret).toBe(1)

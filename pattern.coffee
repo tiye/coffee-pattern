@@ -6,21 +6,25 @@ get_type = (varable) ->
 divide_list = (stack, long_list) ->
   if long_list.length > 0
     solution =
-      tag: long_list[0]
+      pattern: long_list[0]
       result: long_list[1]
     stack.push solution
     divide_list stack, long_list[2..]
   else stack
 
 exports.match = (data, choices...) ->
+  # first, find the available patterns
   possible = (divide_list [], choices).filter (solution) ->
-    if not solution.tag? then true
-    else if (get_type solution.tag) is 'regexp'
-      if (get_type data) is 'string'
-        data.match(solution.tag)
+    the_type = get_type solution.pattern
+    # undefined and null are used to represent 'else'
+    if not solution.pattern? then true
+    else if the_type is 'regexp'
+      if (get_type data) is 'string' then data.match solution.pattern
       else no
-    else data is solution.tag
-  sure = possible.filter (solution) -> solution.tag?
+    else if the_type is 'function' then solution.pattern data
+    else data is solution.pattern
+  sure = possible.filter (solution) -> solution.pattern?
+  # if there is no matching expression, then use 'else'
   chosen = if sure.length > 0 then sure[0] else possible[0]
   if chosen?
     if (get_type chosen.result) is 'function' then chosen.result data
