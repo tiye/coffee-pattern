@@ -1,5 +1,5 @@
 
-{match} = require './pattern'
+{match} = require './pattern.coffee'
 
 describe 'test patterns', ->
   it 'matches number', ->
@@ -17,21 +17,21 @@ describe 'test patterns', ->
 
   it 'has default value', ->
     ret = match 'string',
-      null, 1
+      undefined, 1
     expect(ret).toBe(1)
 
   it 'has callbacks', ->
     ret = match 'string',
       1, 1
       'string', (data) -> data + ' x'
-      null, 1
+      undefined, 1
     expect(ret).toBe('string x')
 
   it 'knows regular expressions', ->
     ret = match 'head',
       /^head/, 'this is head'
       /tail$/, 'this is tail'
-      null, 'nothing'
+      undefined, 'nothing'
     expect(ret).toBe('this is head')
 
   it 'looks nice when have callbacks', ->
@@ -41,7 +41,7 @@ describe 'test patterns', ->
       'complecated', (data) ->
         say = 'long tails'
         console.log say
-      null, (data) -> console.log 'ok anything'
+      undefined, (data) -> console.log 'ok anything'
     expect(ret).toBe(undefined)
 
   it 'returns undefined when really no match', ->
@@ -53,3 +53,15 @@ describe 'test patterns', ->
     ret = match 'string',
       isString, 1
     expect(ret).toBe(1)
+
+  it 'use null as a pattern', ->
+    ret = match null,
+      null, 'is null'
+      undefined, 'default one'
+    expect(ret).toBe('is null')
+
+  it 'data without matching falls to undefined', ->
+    ret = match 'not found',
+      null, 'at null'
+      undefined, 'right'
+    expect(ret).toBe('right')

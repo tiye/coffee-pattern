@@ -21,7 +21,25 @@ match 'string or number here',
   /tail$/, (data) -> print "#{data} matches tail"
   /fine/, 'fine'
   5, (data) -> print 'it is five'
-  null, (data) -> print "#{data} has no matching pattern"
+  null, -> print 'matches null not undefined'
+  undefined, (data) -> print "#{data} has no matching pattern"
+```
+
+or more crazy:
+
+```coffee
+{M} = require 'coffee-pattern'
+
+M (a is that),
+  yes, -> M (b is that),
+    yes, -> print 'do something'
+  no, -> M c,
+    'such string', -> that
+    /such\s|w+/, -> 'that too'
+    undefined, -> M ret,
+      'ok', 'OK'
+      'no', 'NO'
+  undefined, 'fallback'
 ```
 
 ### features
@@ -35,6 +53,7 @@ match 'string or number here',
 
 Read `test.Spec.coffee` to see the cases supported.  
 Read `pattern.coffee` to see how this function works.  
+Run tests with `npm test` with Jasmine and CoffeeScript.  
 
 This is a simple and dirty solution, send me PRs if you have better ideas :)
 

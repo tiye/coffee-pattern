@@ -28,7 +28,7 @@ exports.match = function() {
   possible = (divide_list([], choices)).filter(function(solution) {
     var the_type;
     the_type = get_type(solution.pattern);
-    if (solution.pattern == null) {
+    if (solution.pattern === void 0) {
       return true;
     } else if (the_type === 'regexp') {
       if ((get_type(data)) === 'string') {

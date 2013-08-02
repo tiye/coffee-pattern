@@ -17,7 +17,7 @@ exports.match = (data, choices...) ->
   possible = (divide_list [], choices).filter (solution) ->
     the_type = get_type solution.pattern
     # undefined and null are used to represent 'else'
-    if not solution.pattern? then true
+    if solution.pattern is undefined then true
     else if the_type is 'regexp'
       if (get_type data) is 'string' then data.match solution.pattern
       else no
