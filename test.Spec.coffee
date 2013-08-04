@@ -65,3 +65,22 @@ describe 'test patterns', ->
       null, 'at null'
       undefined, 'right'
     expect(ret).toBe('right')
+
+  it 'only chooses one pattern', ->
+    count = 0
+    match '1',
+      null, -> count += 1
+      undefined, -> count += 1
+      1, -> count += 1
+      '1', -> count += 1
+    expect(count).toBe(1)
+
+  it 'chooses only one even nested', ->
+    count = 0
+    match 1,
+      null, -> count += 1
+      1, -> match 1,
+        1, -> count += 1
+        undefined, -> count += 1
+      undefined, -> count += 1
+    expect(count).toBe(1)
