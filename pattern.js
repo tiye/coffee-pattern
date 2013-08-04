@@ -19,7 +19,7 @@ divide_list = function(stack, long_list) {
           result: long_list[0][key]
         });
       });
-      return divide_list(stack, long_list.slice(keys.length));
+      return divide_list(stack, long_list.slice(1));
     } else {
       stack.push({
         pattern: long_list[0],

@@ -11,7 +11,7 @@ divide_list = (stack, long_list) ->
         stack.push
           pattern: key
           result: long_list[0][key]
-      divide_list stack, long_list[keys.length..]
+      divide_list stack, long_list[1..]
     else
       stack.push
         pattern: long_list[0]

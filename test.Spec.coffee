@@ -91,3 +91,13 @@ describe 'test patterns', ->
       name: -> 1
       undefined, -> 2
     expect(ret).toBe(1)
+
+  it 'dont count wrong on objects', ->
+    ret = match 'e',
+      a: 'a'
+      b: 'b'
+      c: 'c'
+      d: 'd'
+      'e', 'e'
+      undefined, 'nothing'
+    expect(ret).toBe('e')
