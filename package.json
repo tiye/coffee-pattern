@@ -1,6 +1,6 @@
 {
   "name": "coffee-pattern",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "coffee-pattern: write pattern matching in CoffeeScript syntax",
   "main": "pattern.js",
   "scripts": {

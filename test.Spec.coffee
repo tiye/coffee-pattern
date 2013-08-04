@@ -84,3 +84,10 @@ describe 'test patterns', ->
         undefined, -> count += 1
       undefined, -> count += 1
     expect(count).toBe(1)
+
+  it 'supports objects as shortcuts', ->
+    ret = match 'name',
+      '': -> 'empty string'
+      name: -> 1
+      undefined, -> 2
+    expect(ret).toBe(1)

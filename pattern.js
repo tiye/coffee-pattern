@@ -9,14 +9,24 @@ get_type = function(varable) {
 };
 
 divide_list = function(stack, long_list) {
-  var solution;
+  var keys;
   if (long_list.length > 0) {
-    solution = {
-      pattern: long_list[0],
-      result: long_list[1]
-    };
-    stack.push(solution);
-    return divide_list(stack, long_list.slice(2));
+    if ((get_type(long_list[0])) === 'object') {
+      keys = Object.keys(long_list[0]);
+      keys.forEach(function(key) {
+        return stack.push({
+          pattern: key,
+          result: long_list[0][key]
+        });
+      });
+      return divide_list(stack, long_list.slice(keys.length));
+    } else {
+      stack.push({
+        pattern: long_list[0],
+        result: long_list[1]
+      });
+      return divide_list(stack, long_list.slice(2));
+    }
   } else {
     return stack;
   }

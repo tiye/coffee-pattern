@@ -23,6 +23,7 @@ match 'string or number here',
   5, (data) -> print 'it is five'
   null, -> print 'matches null not undefined'
   undefined, (data) -> print "#{data} has no matching pattern"
+  key: -> 'object as a shortcut'
 ```
 
 or more crazy:

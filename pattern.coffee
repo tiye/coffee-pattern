@@ -5,11 +5,18 @@ get_type = (varable) ->
 
 divide_list = (stack, long_list) ->
   if long_list.length > 0
-    solution =
-      pattern: long_list[0]
-      result: long_list[1]
-    stack.push solution
-    divide_list stack, long_list[2..]
+    if (get_type long_list[0]) is 'object'
+      keys = Object.keys long_list[0]
+      keys.forEach (key) ->
+        stack.push
+          pattern: key
+          result: long_list[0][key]
+      divide_list stack, long_list[keys.length..]
+    else
+      stack.push
+        pattern: long_list[0]
+        result: long_list[1]
+      divide_list stack, long_list[2..]
   else stack
 
 exports.match = (data, choices...) ->
